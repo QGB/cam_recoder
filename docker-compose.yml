@@ -1,0 +1,26 @@
+# docker-compose up --build
+version: '3.9'
+
+services:
+  cam1:
+    build: ./recorder
+    network_mode: host
+    # environment:
+      # - NAME=cam1
+      # - RTSP_URL=rtsp://u:p@ip
+      #没用 用.env文件- OUT=/mnt/sdb/cctv_out
+    env_file:
+      - .env
+    volumes:
+      - /home/qgb:/home/qgb
+      - /mnt:/mnt
+      - ${OUT}:/out/
+    restart: always
+
+  # merge:
+  #   build: ./merger
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ${OUT}:/out/
+  #   restart: always
